@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instructions Bombes — Escouade Omega</title>
+  <meta name="theme-color" content="#00D4FF">
+  <link rel="icon" type="image/png" href="images/logo.png?v=2">
+  <style>html,body{background:#020304;}</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=14">
+</head>
+<body>
+  <canvas id="stars-canvas"></canvas>
+
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-emblem"><img src="images/logo.png" alt="Escouade Omega"></div>
+      <span class="nav-brand">ESCOUADE OMEGA</span>
+    </div>
+    <a href="index.html">Accueil</a>
+    <a href="histoire.html">Histoire</a>
+    <a href="membres.html">Membres</a>
+    <a href="reglement.html" target="_blank" rel="noopener">Règlement</a>
+    <a href="effectif.html" target="_blank" rel="noopener">Effectif</a>
+    <a href="bombes.html" class="active">Bombes</a>
+    <a href="piratage.html">Piratage</a>
+  </nav>
+
+  <div class="content">
+
+    <section id="bombes" class="reveal" style="padding-top:3.5rem;">
+      <div class="section-header">
+        <h2 class="section-title">Instructions Bombes</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-intro">Procédure standard de manipulation des charges.</p>
+
+      <div class="bomb-grid">
+        <div class="bomb-card">
+          <div class="bomb-card-img"><img src="images/formation%20bomb/web/entrainement.png" alt="Bombe d'entraînement"></div>
+          <h4>Entraînement</h4>
+          <p>Non explosif</p>
+        </div>
+        <div class="bomb-card">
+          <div class="bomb-card-img"><img src="images/formation%20bomb/web/mega.png" alt="Méga bombe"></div>
+          <h4>Méga bombe</h4>
+          <p>Extrêmement explosif</p>
+        </div>
+        <div class="bomb-card">
+          <div class="bomb-card-img"><img src="images/formation%20bomb/web/large.png" alt="Bombe large"></div>
+          <h4>Bombe large</h4>
+          <p>Très explosif</p>
+        </div>
+        <div class="bomb-card">
+          <div class="bomb-card-img"><img src="images/formation%20bomb/web/moyenne.png" alt="Bombe moyenne"></div>
+          <h4>Bombe moyenne</h4>
+          <p>Explosif classique</p>
+        </div>
+        <div class="bomb-card">
+          <div class="bomb-card-img"><img src="images/formation%20bomb/web/petite.png" alt="Petite bombe"></div>
+          <h4>Petite bombe</h4>
+          <p>Peu explosif</p>
+        </div>
+        <div class="bomb-card">
+          <div class="bomb-card-img"><img src="images/formation%20bomb/web/gaz.png" alt="Bombe à gaz"></div>
+          <h4>Bombe à gaz</h4>
+          <p>Non explosif, contient du gaz toxique</p>
+        </div>
+      </div>
+
+      <div class="mk-section">
+        <h3 class="mk-title"><span>1</span> Bombe MK1</h3>
+        <p class="mk-subtitle">Il faut couper le fil correspondant à la disposition :</p>
+        <div class="mk-panel">
+          <div class="mk-panel-img"><img src="images/formation%20bomb/panel_bombe_mk1.png" alt="Panneau à fils Bombe MK1"></div>
+          <ul class="mk-rules">
+            <li class="mk-rule-priority">S'il y a plusieurs possibilités, c'est le plus haut qui l'emporte (ex. 2 fils bleus, dernier fil noir → 2ᵉ fil).</li>
+            <li>S'il y a plus d'un fil bleu, couper le <strong>2ᵉ fil</strong>.</li>
+            <li>Si le dernier fil est noir, couper le <strong>3ᵉ fil</strong>.</li>
+            <li>Si le premier fil est jaune, couper le <strong>4ᵉ fil</strong>.</li>
+            <li>Si le premier et le dernier fil sont rouges, couper le <strong>2ᵉ fil</strong>.</li>
+            <li>Si aucun des cas ci-dessus ne s'applique, il s'agit du <strong>4ᵉ fil</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mk-section">
+        <h3 class="mk-title"><span>2</span> Bombe MK2</h3>
+        <p class="mk-subtitle">Il faut entrer le code correspondant à la bombe (après avoir coupé le fil) :</p>
+        <div class="mk-panel">
+          <div class="mk-panel-img"><img src="images/formation%20bomb/panel_bombe_mk2.png" alt="Panneau à code Bombe MK2"></div>
+          <ul class="mk-rules">
+            <li>Bombe large et à gaz MK2 : <span class="mk-code">10100011</span> <em>(si le code n'apparaît pas, sélectionner l'avant-dernier code)</em></li>
+            <li>Bombe moyenne MK2 : <span class="mk-code">10000000</span></li>
+            <li>Bombe petite MK2 : <span class="mk-code">01010101</span></li>
+            <li>Bombe entraînement MK2 : <span class="mk-code">00000100</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+      <div class="logo-small"><img src="images/logo.png" alt="Escouade Omega"></div>
+      ESCOUADE OMEGA · GRANDE ARMÉE DE LA RÉPUBLIQUE
+    </footer>
+
+  </div>
+
+  <script src="script.js?v=4"></script>
+</body>
+</html>
