@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=14">
+  <link rel="stylesheet" href="style.css?v=15">
   <script src="model-viewer.min.js"></script>
 </head>
 <body>
@@ -184,7 +184,7 @@
           </div>
         </div>
 
-        <div class="member-card" style="grid-column:1 / -1;">
+        <div class="member-card">
           <div class="member-head">
             <div class="member-avatar">C</div>
             <div>
@@ -267,11 +267,15 @@
           </div>
           <div class="armor-card-caption">RC-8015 Fi</div>
         </div>
-        <div class="armor-card" style="grid-column:1 / -1;">
-          <div class="armor-card-img" style="max-width:420px;margin:0 auto;">
-            <model-viewer id="mv-corr" src="models/corr.glb" camera-controls auto-rotate disable-zoom loading="lazy" shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
+        <div class="armor-card">
+          <div class="armor-card-img">
+            <model-viewer id="mv-corr" src="models/corr_helmet.glb" camera-controls auto-rotate disable-zoom loading="lazy" shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
               min-camera-orbit="auto 78deg auto" max-camera-orbit="auto 78deg auto"
               interaction-prompt="none" alt="Armure de Corr"></model-viewer>
+          </div>
+          <div class="armor-toggle">
+            <button class="armor-toggle-btn active" onclick="setArmorVariant(this,'mv-corr','models/corr_helmet.glb','1.6')">Casque</button>
+            <button class="armor-toggle-btn" onclick="setArmorVariant(this,'mv-corr','models/corr_head.glb','0.85')">Visage</button>
           </div>
           <div class="armor-card-caption">RC-5108/8843 Corr</div>
         </div>
