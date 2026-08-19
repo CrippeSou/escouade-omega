@@ -73,19 +73,20 @@ function setArmorVariant(btn, viewerId, src, exposure) {
 
 // Easter egg : code Konami -> Mode Indien
 (function () {
-  const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowRight','ArrowRight','ArrowRight','ArrowRight','KeyA','KeyB'];
+  const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowRight','ArrowRight','ArrowRight','ArrowRight','a','b'];
   let progress = 0;
   let indianAudio = null;
 
   window.addEventListener('keydown', function (e) {
-    if (e.code === KONAMI[progress]) {
+    const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (key === KONAMI[progress]) {
       progress++;
       if (progress === KONAMI.length) {
         progress = 0;
         triggerIndianMode();
       }
     } else {
-      progress = (e.code === KONAMI[0]) ? 1 : 0;
+      progress = (key === KONAMI[0]) ? 1 : 0;
     }
   });
 
