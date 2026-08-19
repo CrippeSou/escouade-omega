@@ -1,49 +1,51 @@
 const canvas = document.getElementById('stars-canvas');
-const ctx = canvas.getContext('2d');
-let W, H, stars = [];
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [];
 
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
-
-function initStars() {
-  stars = [];
-  for (let i = 0; i < 200; i++) {
-    stars.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 1.5,
-      a: Math.random(),
-      speed: 0.2 + Math.random() * 0.3,
-      drift: Math.random() * 0.15 - 0.075
-    });
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.5,
+        a: Math.random(),
+        speed: 0.2 + Math.random() * 0.3,
+        drift: Math.random() * 0.15 - 0.075
+      });
+    }
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(s => {
+      s.a += 0.005 * s.speed;
+      if (s.a > 1) s.a = 0;
+      s.x += s.drift;
+      if (s.x < 0) s.x = W;
+      if (s.x > W) s.x = 0;
+      s.y -= s.speed;
+      if (s.y < 0) s.y = H;
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(210, 235, 255, ${Math.sin(s.a * Math.PI)})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+
+  initStars();
+  drawStars();
 }
-
-function drawStars() {
-  ctx.clearRect(0, 0, W, H);
-  stars.forEach(s => {
-    s.a += 0.005 * s.speed;
-    if (s.a > 1) s.a = 0;
-    s.x += s.drift;
-    if (s.x < 0) s.x = W;
-    if (s.x > W) s.x = 0;
-    s.y -= s.speed;
-    if (s.y < 0) s.y = H;
-
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(210, 235, 255, ${Math.sin(s.a * Math.PI)})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(drawStars);
-}
-
-initStars();
-drawStars();
 
 // Révélation au défilement
 const reveals = document.querySelectorAll('.reveal');
@@ -197,6 +199,12 @@ function setArmorVariant(btn, viewerId, src, exposure) {
     banner.querySelector('#ib-close').addEventListener('click', disableIndian);
   }
 
+  function swapText(selector, from, to) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      if (el.textContent.trim() === from) el.textContent = to;
+    });
+  }
+
   function enableIndian() {
     if (indianOn) return;
     indianOn = true;
@@ -204,6 +212,8 @@ function setArmorVariant(btn, viewerId, src, exposure) {
     showBanner();
     startRain();
     playIndianAudio();
+    swapText('.nav-brand', 'ESCOUADE OMEGA', 'ESCOUADE INDIEN');
+    swapText('.hero-number', 'OMEGA', 'OMEGADIEN');
     try { localStorage.setItem(LS_KEY, '1'); } catch (_) {}
   }
 
@@ -214,6 +224,8 @@ function setArmorVariant(btn, viewerId, src, exposure) {
     if (banner) { banner.remove(); banner = null; }
     if (rain) { rain.remove(); rain = null; }
     stopIndianAudio();
+    swapText('.nav-brand', 'ESCOUADE INDIEN', 'ESCOUADE OMEGA');
+    swapText('.hero-number', 'OMEGADIEN', 'OMEGA');
     try { localStorage.removeItem(LS_KEY); } catch (_) {}
   }
 
