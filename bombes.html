@@ -10,7 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=18">
+  <script src="model-viewer.min.js"></script>
 </head>
 <body>
   <canvas id="stars-canvas"></canvas>
@@ -23,7 +24,7 @@
     <a href="index.html">Accueil</a>
     <a href="histoire.html">Histoire</a>
     <a href="membres.html">Membres</a>
-    <a href="reglement.html" target="_blank" rel="noopener">Règlement</a>
+    <a href="reglement.html">Règlement</a>
     <a href="effectif.html" target="_blank" rel="noopener">Effectif</a>
     <a href="bombes.html" class="active">Bombes</a>
     <a href="piratage.html">Piratage</a>
@@ -36,67 +37,186 @@
         <h2 class="section-title">Instructions Bombes</h2>
         <div class="section-line"></div>
       </div>
-      <p class="section-intro">Procédure standard de manipulation des charges.</p>
+      <p class="section-intro">Procédure standard de désamorçage. Chaque bombe enchaîne une séquence de modules à
+      réussir intégralement pour être neutralisée : un seul échec et la manipulation entière est ratée.</p>
 
-      <div class="bomb-grid">
-        <div class="bomb-card">
-          <div class="bomb-card-img"><img src="images/formation%20bomb/web/entrainement.png" alt="Bombe d'entraînement"></div>
-          <h4>Entraînement</h4>
-          <p>Non explosif</p>
+      <div class="bomb-model-grid">
+        <div class="bomb-model-card">
+          <div class="bomb-model-card-img">
+            <model-viewer src="models/bomb_training.glb" camera-controls auto-rotate disable-zoom loading="lazy"
+            shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
+            min-camera-orbit="auto 78deg auto" max-camera-orbit="auto 78deg auto" interaction-prompt="none"
+            alt="Bombe d'entraînement"></model-viewer>
+          </div>
+          <div class="bomb-model-caption">
+            <h4>Entraînement</h4>
+            <p>N'explose jamais en cas d'échec. Sert uniquement à s'exercer.</p>
+          </div>
         </div>
-        <div class="bomb-card">
-          <div class="bomb-card-img"><img src="images/formation%20bomb/web/mega.png" alt="Méga bombe"></div>
-          <h4>Méga bombe</h4>
-          <p>Extrêmement explosif</p>
+        <div class="bomb-model-card">
+          <div class="bomb-model-card-img">
+            <model-viewer src="models/bomb_small.glb" camera-controls auto-rotate disable-zoom loading="lazy"
+            shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
+            min-camera-orbit="auto 78deg auto" max-camera-orbit="auto 78deg auto" interaction-prompt="none"
+            alt="Petite bombe"></model-viewer>
+          </div>
+          <div class="bomb-model-caption">
+            <h4>Petite bombe</h4>
+            <p>Rayon d'effet 400.</p>
+          </div>
         </div>
-        <div class="bomb-card">
-          <div class="bomb-card-img"><img src="images/formation%20bomb/web/large.png" alt="Bombe large"></div>
-          <h4>Bombe large</h4>
-          <p>Très explosif</p>
+        <div class="bomb-model-card">
+          <div class="bomb-model-card-img">
+            <model-viewer src="models/bomb_shell.glb" camera-controls auto-rotate disable-zoom loading="lazy"
+            shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
+            min-camera-orbit="auto 78deg auto" max-camera-orbit="auto 78deg auto" interaction-prompt="none"
+            alt="Bombe à fragmentation"></model-viewer>
+          </div>
+          <div class="bomb-model-caption">
+            <h4>Bombe à fragmentation</h4>
+            <p>Rayon d'effet 350. Explosion principale suivie d'une rafale de petites explosions dispersées.</p>
+          </div>
         </div>
-        <div class="bomb-card">
-          <div class="bomb-card-img"><img src="images/formation%20bomb/web/moyenne.png" alt="Bombe moyenne"></div>
-          <h4>Bombe moyenne</h4>
-          <p>Explosif classique</p>
+        <div class="bomb-model-card">
+          <div class="bomb-model-card-img">
+            <model-viewer src="models/bomb_medium.glb" camera-controls auto-rotate disable-zoom loading="lazy"
+            shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
+            min-camera-orbit="auto 78deg auto" max-camera-orbit="auto 78deg auto" interaction-prompt="none"
+            alt="Bombe moyenne"></model-viewer>
+          </div>
+          <div class="bomb-model-caption">
+            <h4>Bombe moyenne</h4>
+            <p>Rayon d'effet 700.</p>
+          </div>
         </div>
-        <div class="bomb-card">
-          <div class="bomb-card-img"><img src="images/formation%20bomb/web/petite.png" alt="Petite bombe"></div>
-          <h4>Petite bombe</h4>
-          <p>Peu explosif</p>
+        <div class="bomb-model-card">
+          <div class="bomb-model-card-img">
+            <model-viewer src="models/bomb_large.glb" camera-controls auto-rotate disable-zoom loading="lazy"
+            shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
+            min-camera-orbit="auto 78deg auto" max-camera-orbit="auto 78deg auto" interaction-prompt="none"
+            alt="Grosse bombe"></model-viewer>
+          </div>
+          <div class="bomb-model-caption">
+            <h4>Grosse bombe</h4>
+            <p>Rayon d'effet 1200.</p>
+          </div>
         </div>
-        <div class="bomb-card">
-          <div class="bomb-card-img"><img src="images/formation%20bomb/web/gaz.png" alt="Bombe à gaz"></div>
-          <h4>Bombe à gaz</h4>
-          <p>Non explosif, contient du gaz toxique</p>
+        <div class="bomb-model-card">
+          <div class="bomb-model-card-img">
+            <model-viewer src="models/bomb_mega.glb" camera-controls auto-rotate disable-zoom loading="lazy"
+            shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
+            min-camera-orbit="auto 78deg auto" max-camera-orbit="auto 78deg auto" interaction-prompt="none"
+            alt="Méga bombe"></model-viewer>
+          </div>
+          <div class="bomb-model-caption">
+            <h4>Méga bombe</h4>
+            <p>Rayon d'effet 1500. La plus destructrice de l'arsenal.</p>
+          </div>
+        </div>
+        <div class="bomb-model-card">
+          <div class="bomb-model-card-img">
+            <model-viewer src="models/bomb_gas.glb" camera-controls auto-rotate disable-zoom loading="lazy"
+            shadow-intensity="0.4" exposure="1.6" environment-image="neutral"
+            min-camera-orbit="auto 78deg auto" max-camera-orbit="auto 78deg auto" interaction-prompt="none"
+            alt="Bombe à gaz"></model-viewer>
+          </div>
+          <div class="bomb-model-caption">
+            <h4>Bombe à gaz</h4>
+            <p>Rayon d'effet 1300. Laisse un nuage toxique qui inflige 40 dégâts par seconde pendant 10 secondes à
+            quiconque reste dans la zone après l'explosion.</p>
+          </div>
         </div>
       </div>
 
       <div class="mk-section">
-        <h3 class="mk-title"><span>1</span> Bombe MK1</h3>
-        <p class="mk-subtitle">Il faut couper le fil correspondant à la disposition :</p>
-        <div class="mk-panel">
-          <div class="mk-panel-img"><img src="images/formation%20bomb/panel_bombe_mk1.png" alt="Panneau à fils Bombe MK1"></div>
+        <h3 class="mk-title"><span>1</span> Progression MK1 → MK3</h3>
+        <div class="mk-panel" style="grid-template-columns:1fr;">
           <ul class="mk-rules">
-            <li class="mk-rule-priority">S'il y a plusieurs possibilités, c'est le plus haut qui l'emporte (ex. 2 fils bleus, dernier fil noir → 2ᵉ fil).</li>
-            <li>S'il y a plus d'un fil bleu, couper le <strong>2ᵉ fil</strong>.</li>
-            <li>Si le dernier fil est noir, couper le <strong>3ᵉ fil</strong>.</li>
-            <li>Si le premier fil est jaune, couper le <strong>4ᵉ fil</strong>.</li>
-            <li>Si le premier et le dernier fil sont rouges, couper le <strong>2ᵉ fil</strong>.</li>
-            <li>Si aucun des cas ci-dessus ne s'applique, il s'agit du <strong>4ᵉ fil</strong>.</li>
+            <li><strong>MK1</strong> : module Fils uniquement, sur 5 fils.</li>
+            <li><strong>MK2</strong> : module Fils sur 6 fils, suivi d'un second module tiré au hasard entre
+            Terminal de reconnaissance et Console de sécurité (un seul des deux à chaque fois).</li>
+            <li><strong>MK3</strong> : module Fils sur 7 fils, puis Terminal de reconnaissance, puis Corrélation
+            (variante qui combine le fil coupé, le mot trouvé et le n° de série).</li>
           </ul>
         </div>
       </div>
 
       <div class="mk-section">
-        <h3 class="mk-title"><span>2</span> Bombe MK2</h3>
-        <p class="mk-subtitle">Il faut entrer le code correspondant à la bombe (après avoir coupé le fil) :</p>
-        <div class="mk-panel">
-          <div class="mk-panel-img"><img src="images/formation%20bomb/panel_bombe_mk2.png" alt="Panneau à code Bombe MK2"></div>
+        <h3 class="mk-title"><span>2</span> Module Fils</h3>
+        <p class="mk-subtitle">Un seul clic, irréversible. Cinq couleurs possibles : Noir, Blanc, Rouge, Bleu,
+        Jaune. Première règle qui correspond à la configuration l'emporte.</p>
+        <div class="mk-panel" style="grid-template-columns:1fr;">
           <ul class="mk-rules">
-            <li>Bombe large et à gaz MK2 : <span class="mk-code">10100011</span> <em>(si le code n'apparaît pas, sélectionner l'avant-dernier code)</em></li>
-            <li>Bombe moyenne MK2 : <span class="mk-code">10000000</span></li>
-            <li>Bombe petite MK2 : <span class="mk-code">01010101</span></li>
-            <li>Bombe entraînement MK2 : <span class="mk-code">00000100</span></li>
+            <li class="mk-rule-priority"><strong>5 fils</strong></li>
+            <li>Le dernier fil est noir et le n° de série est impair → coupez le <strong>4e fil</strong>.</li>
+            <li>Sinon, exactement 1 fil rouge et plus d'un fil jaune → coupez le <strong>4e fil</strong>.</li>
+            <li>Sinon, au moins 2 fils bleus et aucun fil blanc → coupez le <strong>3e fil</strong>.</li>
+            <li>Sinon, aucun fil jaune et aucun fil rouge → coupez le <strong>dernier fil</strong>.</li>
+            <li>Sinon, aucun fil noir → coupez le <strong>2e fil</strong>.</li>
+            <li>Sinon → coupez le <strong>1er fil</strong>.</li>
+          </ul>
+        </div>
+        <div class="mk-panel" style="grid-template-columns:1fr;margin-top:1.2rem;">
+          <ul class="mk-rules">
+            <li class="mk-rule-priority"><strong>6 fils</strong></li>
+            <li>Aucun fil jaune et le n° de série est impair → coupez le <strong>3e fil</strong>.</li>
+            <li>Sinon, exactement 1 fil jaune et plus d'un fil blanc → coupez le <strong>4e fil</strong>.</li>
+            <li>Sinon, au moins 2 fils rouges et aucun fil bleu → coupez le <strong>2e fil</strong>.</li>
+            <li>Sinon, aucun fil blanc et au moins 2 fils noirs → coupez le <strong>5e fil</strong>.</li>
+            <li>Sinon, aucun fil noir → coupez le <strong>dernier fil</strong>.</li>
+            <li>Sinon → coupez le <strong>4e fil</strong>.</li>
+          </ul>
+        </div>
+        <div class="mk-panel" style="grid-template-columns:1fr;margin-top:1.2rem;">
+          <ul class="mk-rules">
+            <li class="mk-rule-priority"><strong>7 fils</strong></li>
+            <li>Aucun fil bleu et le n° de série est impair → coupez le <strong>5e fil</strong>.</li>
+            <li>Sinon, exactement 1 fil bleu et plus d'un fil rouge → coupez le <strong>5e fil</strong>.</li>
+            <li>Sinon, au moins 2 fils noirs et aucun fil blanc → coupez le <strong>3e fil</strong>.</li>
+            <li>Sinon, aucun fil rouge et au moins 2 fils jaunes → coupez le <strong>6e fil</strong>.</li>
+            <li>Sinon, aucun fil jaune → coupez le <strong>dernier fil</strong>.</li>
+            <li>Sinon → coupez le <strong>5e fil</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mk-section">
+        <h3 class="mk-title"><span>3</span> Terminal de reconnaissance</h3>
+        <p class="mk-subtitle">Un mot de 5 lettres est tiré parmi la liste ci-dessous. Pour chaque colonne, cliquez
+        les lettres jusqu'à trouver la bonne (elle passe au vert), puis validez le code. Chaque mauvais clic coûte
+        3 secondes.</p>
+        <div class="mk-panel" style="grid-template-columns:1fr;">
+          <ul class="mk-rules">
+            <li>DOOKU · DROID · TRADE · ARMOR · METAL · LASER · CORPS · STEEL · SPARK · BLAST</li>
+            <li>RAXUS · SKAKO · UNION · GUILD · HYENA · FLEET · CLANS · RECON · IONIC · MAGNA</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mk-section">
+        <h3 class="mk-title"><span>4</span> Console de sécurité</h3>
+        <p class="mk-subtitle">Le n° de série (10 à 99) indique quel bouton presser :</p>
+        <div class="mk-panel" style="grid-template-columns:1fr;">
+          <ul class="mk-rules">
+            <li>10 – 29 → <strong>Vert</strong></li>
+            <li>30 – 49 → <strong>Bleu</strong></li>
+            <li>50 – 69 → <strong>Rouge</strong></li>
+            <li>70 – 99 → <strong>Jaune</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mk-section">
+        <h3 class="mk-title"><span>5</span> Corrélation (MK3)</h3>
+        <p class="mk-subtitle">Variante qui combine la couleur du fil coupé, la première lettre du mot trouvé et la
+        parité du n° de série. Première règle qui correspond l'emporte.</p>
+        <div class="mk-panel" style="grid-template-columns:1fr;">
+          <ul class="mk-rules">
+            <li>Fil coupé rouge et le mot commence par une voyelle (A E I O U) → <strong>Jaune</strong></li>
+            <li>Sinon, fil coupé noir ou blanc → n° de série impair : <strong>Vert</strong>, n° de série pair :
+            <strong>Bleu</strong></li>
+            <li>Sinon, le mot commence par une consonne et le n° de série est impair → <strong>Rouge</strong></li>
+            <li>Sinon → <strong>Vert</strong></li>
           </ul>
         </div>
       </div>
