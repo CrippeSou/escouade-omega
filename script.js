@@ -92,6 +92,11 @@ function setArmorVariant(btn, viewerId, src, exposure) {
     'chorégraphie Bollywood synchronisée ✓',
     'MISSION TOURISTA : SUCCÈS — NAMASTÉ 🙏'
   ];
+  const INDIAN_WORDS = [
+    'Namasté','Diwali','Holi','Chai','Curry','Naan','Bollywood','Maharaja',
+    'Ashram','Yoga','Karma','Mousson','Gange','Taj Mahal','Sari','Henné',
+    'Guru','Raja','Samosa','Masala'
+  ];
 
   let progress = 0;
   let indianAudio = null;
@@ -205,6 +210,31 @@ function setArmorVariant(btn, viewerId, src, exposure) {
     });
   }
 
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function renameImportantThings() {
+    const targets = document.querySelectorAll('nav > a, .quicklink-title');
+    const words = shuffle(INDIAN_WORDS);
+    targets.forEach(function (el, i) {
+      if (!el.dataset.indianOriginal) el.dataset.indianOriginal = el.textContent;
+      el.textContent = words[i % words.length];
+    });
+  }
+
+  function restoreImportantThings() {
+    document.querySelectorAll('[data-indian-original]').forEach(function (el) {
+      el.textContent = el.dataset.indianOriginal;
+      delete el.dataset.indianOriginal;
+    });
+  }
+
   function enableIndian() {
     if (indianOn) return;
     indianOn = true;
@@ -214,6 +244,7 @@ function setArmorVariant(btn, viewerId, src, exposure) {
     playIndianAudio();
     swapText('.nav-brand', 'ESCOUADE OMEGA', 'ESCOUADE INDIEN');
     swapText('.hero-number', 'OMEGA', 'OMEGADIEN');
+    renameImportantThings();
     try { localStorage.setItem(LS_KEY, '1'); } catch (_) {}
   }
 
@@ -226,6 +257,7 @@ function setArmorVariant(btn, viewerId, src, exposure) {
     stopIndianAudio();
     swapText('.nav-brand', 'ESCOUADE INDIEN', 'ESCOUADE OMEGA');
     swapText('.hero-number', 'OMEGADIEN', 'OMEGA');
+    restoreImportantThings();
     try { localStorage.removeItem(LS_KEY); } catch (_) {}
   }
 
