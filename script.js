@@ -70,3 +70,68 @@ function setArmorVariant(btn, viewerId, src, exposure) {
   group.forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
+
+// Easter egg : code Konami -> Mode Indien
+(function () {
+  const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+  let progress = 0;
+
+  window.addEventListener('keydown', function (e) {
+    if (e.code === KONAMI[progress]) {
+      progress++;
+      if (progress === KONAMI.length) {
+        progress = 0;
+        triggerIndianMode();
+      }
+    } else {
+      progress = (e.code === KONAMI[0]) ? 1 : 0;
+    }
+  });
+
+  function triggerIndianMode() {
+    if (document.getElementById('indian-mode-overlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'indian-mode-overlay';
+    overlay.innerHTML = `
+      <div class="im-box">
+        <button class="im-close" aria-label="Fermer">&times;</button>
+        <div class="im-status">TRANSFERT SÉCURISÉ EN COURS...</div>
+        <div class="im-bar"><div class="im-bar-fill"></div></div>
+        <div class="im-pct">0%</div>
+        <div class="im-result" hidden>
+          <span class="im-flag">🇮🇳</span>
+          <span class="im-label">MODE INDIEN ACTIVÉ</span>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+
+    const fill = overlay.querySelector('.im-bar-fill');
+    const pct = overlay.querySelector('.im-pct');
+    const status = overlay.querySelector('.im-status');
+    const result = overlay.querySelector('.im-result');
+    const closeBtn = overlay.querySelector('.im-close');
+
+    let pctVal = 0;
+    const timer = setInterval(function () {
+      pctVal = Math.min(100, pctVal + Math.ceil(Math.random() * 18));
+      fill.style.width = pctVal + '%';
+      pct.textContent = pctVal + '%';
+      if (pctVal >= 100) {
+        clearInterval(timer);
+        status.textContent = 'CONNEXION ÉTABLIE';
+        result.hidden = false;
+      }
+    }, 140);
+
+    function close() {
+      clearInterval(timer);
+      overlay.remove();
+      document.removeEventListener('keydown', onEsc);
+    }
+    function onEsc(e) { if (e.code === 'Escape') close(); }
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', onEsc);
+  }
+})();
