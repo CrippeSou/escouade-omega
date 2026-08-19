@@ -73,8 +73,9 @@ function setArmorVariant(btn, viewerId, src, exposure) {
 
 // Easter egg : code Konami -> Mode Indien
 (function () {
-  const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+  const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowRight','ArrowRight','ArrowRight','ArrowRight','KeyA','KeyB'];
   let progress = 0;
+  let indianAudio = null;
 
   window.addEventListener('keydown', function (e) {
     if (e.code === KONAMI[progress]) {
@@ -121,11 +122,13 @@ function setArmorVariant(btn, viewerId, src, exposure) {
         clearInterval(timer);
         status.textContent = 'CONNEXION ÉTABLIE';
         result.hidden = false;
+        playIndianAudio();
       }
     }, 140);
 
     function close() {
       clearInterval(timer);
+      stopIndianAudio();
       overlay.remove();
       document.removeEventListener('keydown', onEsc);
     }
@@ -133,5 +136,22 @@ function setArmorVariant(btn, viewerId, src, exposure) {
     closeBtn.addEventListener('click', close);
     overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
     document.addEventListener('keydown', onEsc);
+  }
+
+  function playIndianAudio() {
+    if (!indianAudio) {
+      indianAudio = new Audio('audio/indian-meme-song-original.mp3');
+      indianAudio.loop = true;
+      indianAudio.volume = 0.8;
+    }
+    indianAudio.currentTime = 0;
+    indianAudio.play().catch(function () {});
+  }
+
+  function stopIndianAudio() {
+    if (indianAudio) {
+      indianAudio.pause();
+      indianAudio.currentTime = 0;
+    }
   }
 })();
