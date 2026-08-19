@@ -77,7 +77,7 @@ function setArmorVariant(btn, viewerId, src, exposure) {
 (function () {
   const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowRight','ArrowRight','ArrowRight','ArrowRight','a','b'];
   const LS_KEY = 'omega-indian-mode';
-  const RAIN_EMOJI = ['🧀','🍛','🐘','🛺','🇮🇳','🙏','🥘','🫓','🐅','🪕'];
+  const RAIN_EMOJI = ['🧀','🍛','🐘','🛺','🙏','🥘','🐅'];
   const TICKER = [
     'cheese naan localisé ✓',
     'poulet tikka massala : coordonnées acquises ✓',

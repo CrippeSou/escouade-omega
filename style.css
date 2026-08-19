@@ -311,7 +311,15 @@ body.indian nav{margin-top:2.6rem;top:2.6rem;}
 #ib-close:hover{background:#0b0e14;}
 
 #indian-rain{position:fixed;inset:0;z-index:1600;pointer-events:none;overflow:hidden;}
-#indian-rain span{position:absolute;top:-12%;animation:imFall linear infinite;will-change:transform;opacity:0.9;}
+#indian-rain span{
+  position:absolute;top:-12%;line-height:1;
+  animation:imFall linear infinite;will-change:transform;opacity:0.95;
+  text-shadow:0 0 6px rgba(0,0,0,0.6);
+}
+#indian-rain span::before{
+  content:'';position:absolute;inset:-0.35em;z-index:-1;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,153,51,0.55),rgba(19,136,8,0.4) 70%,transparent 100%);
+}
 @keyframes imFall{to{transform:translateY(125vh) rotate(360deg);}}
 
 @media(max-width:768px){
