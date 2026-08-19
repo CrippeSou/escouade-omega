@@ -299,7 +299,7 @@ body.indian nav{margin-top:2.6rem;top:2.6rem;}
 .ib-track{
   position:absolute;left:0;top:50%;white-space:nowrap;will-change:transform;
   font-family:'Share Tech Mono',monospace;font-size:0.8rem;font-weight:700;
-  color:#10250a;animation:ibScroll 26s linear infinite;
+  color:#10250a;transform:translateY(-50%);animation:ibScroll 26s linear infinite;
 }
 .ib-track span{margin:0 1.1rem;}
 @keyframes ibScroll{from{transform:translate(0,-50%);}to{transform:translate(-50%,-50%);}}
@@ -317,8 +317,4 @@ body.indian nav{margin-top:2.6rem;top:2.6rem;}
 @media(max-width:768px){
   #indian-banner{flex-wrap:wrap;}
   .ib-ticker{order:3;flex-basis:100%;}
-}
-@media(prefers-reduced-motion:reduce){
-  #indian-rain{display:none;}
-  .ib-track{animation:none;}
 }
