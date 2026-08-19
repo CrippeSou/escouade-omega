@@ -71,11 +71,31 @@ function setArmorVariant(btn, viewerId, src, exposure) {
   btn.classList.add('active');
 }
 
-// Easter egg : code Konami -> Mode Indien
+// Easter egg : code Konami -> Mode Indien (drapeau + musique + persistance sur tout le site)
 (function () {
   const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowRight','ArrowRight','ArrowRight','ArrowRight','a','b'];
+  const LS_KEY = 'omega-indian-mode';
+  const RAIN_EMOJI = ['🧀','🍛','🐘','🛺','🇮🇳','🙏','🥘','🫓','🐅','🪕'];
+  const TICKER = [
+    'cheese naan localisé ✓',
+    'poulet tikka massala : coordonnées acquises ✓',
+    'samosa chaud détecté (croustillant confirmé) ✓',
+    'lassi mangue : stock validé ✓',
+    'biryani géolocalisé à 200 m ✓',
+    'tuk-tuk en approche — tarif négocié ✓',
+    '⚠ vache sacrée sur la voie : contournement',
+    'klaxon calibré à 128 dB ✓',
+    'Taj Mahal indexé en haute résolution ✓',
+    'thé masala chai infusé ✓',
+    'chorégraphie Bollywood synchronisée ✓',
+    'MISSION TOURISTA : SUCCÈS — NAMASTÉ 🙏'
+  ];
+
   let progress = 0;
   let indianAudio = null;
+  let indianOn = false;
+  let banner = null;
+  let rain = null;
 
   window.addEventListener('keydown', function (e) {
     const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
@@ -83,14 +103,18 @@ function setArmorVariant(btn, viewerId, src, exposure) {
       progress++;
       if (progress === KONAMI.length) {
         progress = 0;
-        triggerIndianMode();
+        if (indianOn) { disableIndian(); } else { showActivationModal(); }
       }
     } else {
       progress = (key === KONAMI[0]) ? 1 : 0;
     }
   });
 
-  function triggerIndianMode() {
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && indianOn) disableIndian();
+  });
+
+  function showActivationModal() {
     if (document.getElementById('indian-mode-overlay')) return;
 
     const overlay = document.createElement('div');
@@ -123,20 +147,74 @@ function setArmorVariant(btn, viewerId, src, exposure) {
         clearInterval(timer);
         status.textContent = 'CONNEXION ÉTABLIE';
         result.hidden = false;
-        playIndianAudio();
+        enableIndian();
+        setTimeout(closeModal, 1400);
       }
     }, 140);
 
-    function close() {
+    function closeModal() {
       clearInterval(timer);
-      stopIndianAudio();
       overlay.remove();
       document.removeEventListener('keydown', onEsc);
     }
-    function onEsc(e) { if (e.code === 'Escape') close(); }
-    closeBtn.addEventListener('click', close);
-    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    function onEsc(e) { if (e.key === 'Escape') closeModal(); }
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
     document.addEventListener('keydown', onEsc);
+  }
+
+  function fillTicker(track) {
+    track.innerHTML = TICKER.concat(TICKER).map(function (t) { return '<span>' + t + '</span>'; }).join('');
+  }
+
+  function startRain() {
+    rain = document.createElement('div');
+    rain.id = 'indian-rain';
+    document.body.appendChild(rain);
+    for (let i = 0; i < 40; i++) {
+      const s = document.createElement('span');
+      s.textContent = RAIN_EMOJI[Math.floor(Math.random() * RAIN_EMOJI.length)];
+      s.style.left = (Math.random() * 100) + '%';
+      s.style.animationDuration = (5 + Math.random() * 6) + 's';
+      s.style.animationDelay = (Math.random() * 6) + 's';
+      s.style.fontSize = (1.1 + Math.random() * 2) + 'rem';
+      rain.appendChild(s);
+    }
+  }
+
+  function showBanner() {
+    banner = document.createElement('div');
+    banner.id = 'indian-banner';
+    banner.setAttribute('role', 'status');
+    banner.setAttribute('aria-label', 'Mode indien activé');
+    banner.innerHTML = `
+      <span class="ib-flag">🇮🇳</span>
+      <strong class="ib-title">MODE INDIEN ACTIVÉ</strong>
+      <div class="ib-ticker"><div class="ib-track"></div></div>
+      <button id="ib-close" title="Quitter le mode indien" aria-label="Quitter le mode indien">&times;</button>`;
+    document.body.appendChild(banner);
+    fillTicker(banner.querySelector('.ib-track'));
+    banner.querySelector('#ib-close').addEventListener('click', disableIndian);
+  }
+
+  function enableIndian() {
+    if (indianOn) return;
+    indianOn = true;
+    document.body.classList.add('indian');
+    showBanner();
+    startRain();
+    playIndianAudio();
+    try { localStorage.setItem(LS_KEY, '1'); } catch (_) {}
+  }
+
+  function disableIndian() {
+    if (!indianOn) return;
+    indianOn = false;
+    document.body.classList.remove('indian');
+    if (banner) { banner.remove(); banner = null; }
+    if (rain) { rain.remove(); rain = null; }
+    stopIndianAudio();
+    try { localStorage.removeItem(LS_KEY); } catch (_) {}
   }
 
   function playIndianAudio() {
@@ -146,7 +224,14 @@ function setArmorVariant(btn, viewerId, src, exposure) {
       indianAudio.volume = 0.8;
     }
     indianAudio.currentTime = 0;
-    indianAudio.play().catch(function () {});
+    indianAudio.play().catch(function () {
+      // Lecture auto bloquée par le navigateur : on retentera au premier clic
+      document.addEventListener('click', resumeAudioOnce, { once: true });
+    });
+  }
+
+  function resumeAudioOnce() {
+    if (indianOn && indianAudio) indianAudio.play().catch(function () {});
   }
 
   function stopIndianAudio() {
@@ -155,4 +240,9 @@ function setArmorVariant(btn, viewerId, src, exposure) {
       indianAudio.currentTime = 0;
     }
   }
+
+  // Persistance : le mode indien reste actif quand on navigue sur le site
+  try {
+    if (localStorage.getItem(LS_KEY) === '1') enableIndian();
+  } catch (_) {}
 })();

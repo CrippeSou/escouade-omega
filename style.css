@@ -270,3 +270,55 @@ footer .logo-small img{width:100%;height:100%;object-fit:cover;}
   font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;
   color:var(--white);letter-spacing:2px;
 }
+
+/* Mode Indien : teinte drapeau + bannière persistante sur tout le site */
+body.indian::before{
+  content:'';position:fixed;inset:0;z-index:1500;pointer-events:none;mix-blend-mode:screen;
+  background:linear-gradient(180deg,rgba(255,153,51,0.16) 0%,transparent 32%,transparent 68%,rgba(19,136,8,0.16) 100%);
+}
+body.indian nav{margin-top:2.6rem;top:2.6rem;}
+
+#indian-banner{
+  position:fixed;top:0;left:0;right:0;z-index:2000;
+  display:flex;align-items:center;gap:0.7rem;padding:0.45rem 0.8rem;
+  font-family:'Rajdhani',sans-serif;color:#0b0e14;
+  background:linear-gradient(90deg,#FF9933 0%,#FF9933 18%,#ffffff 50%,#138808 82%,#138808 100%);
+  box-shadow:0 4px 22px rgba(0,0,0,0.5);animation:fade-in 0.4s ease both;
+}
+.ib-flag{font-size:1.3rem;line-height:1;flex:none;}
+.ib-title{
+  font-family:'Orbitron',monospace;font-weight:900;letter-spacing:0.12em;
+  font-size:clamp(0.7rem,2.4vw,0.95rem);white-space:nowrap;color:#0b0e14;
+  text-shadow:0 1px 0 rgba(255,255,255,0.45);flex:none;
+}
+.ib-ticker{
+  flex:1;min-width:0;overflow:hidden;position:relative;height:1.4rem;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+.ib-track{
+  position:absolute;left:0;top:50%;white-space:nowrap;will-change:transform;
+  font-family:'Share Tech Mono',monospace;font-size:0.8rem;font-weight:700;
+  color:#10250a;animation:ibScroll 26s linear infinite;
+}
+.ib-track span{margin:0 1.1rem;}
+@keyframes ibScroll{from{transform:translate(0,-50%);}to{transform:translate(-50%,-50%);}}
+#ib-close{
+  flex:none;width:1.7rem;height:1.7rem;border-radius:50%;font-weight:900;font-size:0.9rem;
+  background:rgba(11,14,20,0.88);color:#FF9933;border:1px solid rgba(11,14,20,0.5);
+  line-height:1;cursor:pointer;transition:background 0.2s;
+}
+#ib-close:hover{background:#0b0e14;}
+
+#indian-rain{position:fixed;inset:0;z-index:1600;pointer-events:none;overflow:hidden;}
+#indian-rain span{position:absolute;top:-12%;animation:imFall linear infinite;will-change:transform;opacity:0.9;}
+@keyframes imFall{to{transform:translateY(125vh) rotate(360deg);}}
+
+@media(max-width:768px){
+  #indian-banner{flex-wrap:wrap;}
+  .ib-ticker{order:3;flex-basis:100%;}
+}
+@media(prefers-reduced-motion:reduce){
+  #indian-rain{display:none;}
+  .ib-track{animation:none;}
+}
